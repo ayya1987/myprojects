@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="progressBarApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Progressbars</title>
+<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/progress.css">
+<script src="lib/angular/angular.js"></script>
+<script src="js/app.js"></script>
+</head>
+<body>
+<div id="mainDiv" data-ng-controller="progressBarController as pBars" ng-init="pBars.init()">
+	<div id="progressBarsDiv" class="progressBarDiv">
+		  <div class="progress progressBarCustom progress-bar-striped active" ng-repeat="bar in pBars.progressBars.bars" id="progressBar{{$index}}">
+		  			<span class="progressBarText">{{bar}}%</span>
+				  	<div class="progress-bar" role="progressbar" aria-valuenow="{{bar}}" aria-valuemin="0" aria-valuemax="100" 
+				  	ng-style="{'width': '{{bar}}%','background-color':'{{pBars.progressBarsColor[$index]}}'}"></div>
+		  </div>
+	</div>
+	<div id="controlsDiv" class="controlsDiv">
+	<select class="dropdown optionClass" ng-model="pBars.selectedBar">
+	  <option ng-repeat="bar in pBars.progressBars.bars" ng-selected="{{pBars.selectedBar}}" value={{$index}}>SelectBar{{$index+1}}</option>
+	</select>
+	<span class="progress" ng-repeat="btnVal in pBars.progressBars.buttons">
+		<button type="button" class="btn btn-default" ng-click="pBars.setBarsValue(btnVal);">{{btnVal}}</button>
+	</span>
+	</div>
+</div>
+</body>
+</html>
