@@ -6,12 +6,14 @@ angular.module('progressBarApp', [])
 		pBars.progressBarsColor = [];
 		pBars.selectedBar = 0;
 	}
+	/* Get progress bar data from endpoint */
 	$http.get('http://pb-api.herokuapp.com/bars').success(function(data){
 		pBars.progressBars=data;
 		angular.forEach(pBars.progressBars.bars, function(objValue,index) {
 			pBars.progressBarsColor[index]="light-blue";
 		});
 	});
+	/* set bar value based on selection and button value */
 	pBars.setBarsValue=function(btnValue){
 		angular.forEach(pBars.progressBars.bars, function(objValue,index) {
 			if(pBars.selectedBar == index){
